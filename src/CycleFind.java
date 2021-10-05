@@ -1,3 +1,4 @@
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jgrapht.generate.GnmRandomGraphGenerator;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultUndirectedGraph;
@@ -29,7 +30,7 @@ public class CycleFind {
 
     void createGraphAndList(int numberOfNodes, int numberOfEdges) {
         DefaultUndirectedGraph<String, DefaultEdge> currentGraph = generateGraph(numberOfNodes, numberOfEdges);
-        System.out.println(Arrays.toString(currentGraph.toString().split("]")));
+//        System.out.println(Arrays.toString(currentGraph.toString().split("]")));
         String[] str = currentGraph.toString().split("]");
         initializeAdjList(numberOfNodes);
         int a = 0;
@@ -86,29 +87,35 @@ public class CycleFind {
 
     public static void main(String[] args) {
         CycleFind cycle = new CycleFind();
-        int nodes = 5;
-        int executionTime[] = new int[nodes];
+        int nodes = 10;
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for(int i = 1;i<=nodes;i++) {
             int edges = (int)(Math.random() * i*(i-1)/2);
             cycle.createGraphAndList(i, edges);
             long startTime = System.nanoTime();
             if(cycle.initiateCycleFindingProcess(i)) {
-                System.out.println("Cycle found. Cycle Path: ");
+//                System.out.println("Cycle found. Cycle Path: ");
                 int cycleStartEndNode = cycle.stack.pop();
                 int completeCycleNode = cycle.stack.peek();
 //                System.out.println("start end node: " + cycleStartEndNode);
                 while (!cycle.stack.empty()) {
                     // Will print only until the point where the cycle was found, not beyond that
                     if(cycle.stack.peek() != cycleStartEndNode) {
-                        System.out.print(cycle.stack.pop() + " ");
+//                        System.out.print(cycle.stack.pop() + " ");
+                        cycle.stack.pop();
                     } else break;
                 }
-                System.out.print(cycleStartEndNode + " " + completeCycleNode + "\n");
+//                System.out.print(cycleStartEndNode + " " + completeCycleNode + "\n");
             } else {
-                System.out.println("Cycle not found");
+//                System.out.println("Cycle not found");
             }
             long endTime = System.nanoTime();
-            System.out.println("Execution time: " + (endTime - startTime));
+            dataset.addValue(endTime - startTime, "", Integer.toString(i+edges));
+//            System.out.println("Execution time: " + (endTime - startTime));
         }
+        // Plotting the line graph for processing time as a function of the graph size
+//        System.out.println("Yolo!");
+        PlotLineGraph plotLineGraph = new PlotLineGraph("Cycle Finding Graph");
+        plotLineGraph.plot(dataset, "Cycle Finding Graph" , "Nodes + Edges", "Execution Time(in ns)");
     }
 }
