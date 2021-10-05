@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="jgrapht.core" type="repository">
+    <properties maven-id="org.jgrapht:jgrapht-core:1.5.1">
+      <exclude>
+        <dependency maven-id="org.jgrapht:jgrapht-core" />
+        <dependency maven-id="org.jheaps:jheaps" />
+      </exclude>
+    </properties>
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
