@@ -1,0 +1,151 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 1048576 bytes for AllocateHeap
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (memory/allocation.inline.hpp:61), pid=2672, tid=13404
+#
+# JRE version:  (8.0_91-b15) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.91-b15 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000000032a2800):  JavaThread "Unknown thread" [_thread_in_vm, id=13404, stack(0x0000000003060000,0x0000000003160000)]
+
+Stack: [0x0000000003060000,0x0000000003160000]
+[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x00000000032a2800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=13404, stack(0x0000000003060000,0x0000000003160000)]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 57344K, used 983K [0x0000000780900000, 0x0000000784900000, 0x00000007c0000000)
+  eden space 49152K, 2% used [0x0000000780900000,0x00000007809f5c38,0x0000000783900000)
+  from space 8192K, 0% used [0x0000000784100000,0x0000000784100000,0x0000000784900000)
+  to   space 8192K, 0% used [0x0000000783900000,0x0000000783900000,0x0000000784100000)
+ ParOldGen       total 131072K, used 0K [0x0000000701a00000, 0x0000000709a00000, 0x0000000780900000)
+  object space 131072K, 0% used [0x0000000701a00000,0x0000000701a00000,0x0000000709a00000)
+ Metaspace       used 769K, capacity 4480K, committed 4480K, reserved 1056768K
+  class space    used 75K, capacity 384K, committed 384K, reserved 1048576K
+
+Card table byte_map: [0x0000000012760000,0x0000000012d60000] byte_map_base: 0x000000000ef53000
+
+Marking Bits: (ParMarkBitMap*) 0x0000000053432f70
+ Begin Bits: [0x0000000013560000, 0x00000000164f8000)
+ End Bits:   [0x00000000164f8000, 0x0000000019490000)
+
+Polling page: 0x0000000001420000
+
+CodeCache: size=245760Kb used=328Kb max_used=328Kb free=245431Kb
+ bounds [0x00000000033a0000, 0x0000000003610000, 0x00000000123a0000]
+ total_blobs=58 nmethods=0 adapters=38
+ compilation: enabled
+
+Compilation events (0 events):
+No events
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.046 loading class java/lang/Short
+Event: 0.047 loading class java/lang/Short done
+Event: 0.047 loading class java/lang/Integer
+Event: 0.047 loading class java/lang/Integer done
+Event: 0.047 loading class java/lang/Long
+Event: 0.047 loading class java/lang/Long done
+Event: 0.048 loading class java/lang/NullPointerException
+Event: 0.048 loading class java/lang/NullPointerException done
+Event: 0.048 loading class java/lang/ArithmeticException
+Event: 0.048 loading class java/lang/ArithmeticException done
+
+
+Dynamic libraries:
+0x00007ff7b2330000 - 0x00007ff7b2367000 	C:\Program Files\Java\jdk1.8.0_91\bin\java.exe
+0x00007fffbe830000 - 0x00007fffbea25000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007fffbd840000 - 0x00007fffbd8fe000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007fffbbf50000 - 0x00007fffbc219000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007fffbd680000 - 0x00007fffbd72c000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007fffbe060000 - 0x00007fffbe0fe000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007fffbc880000 - 0x00007fffbc91b000 	C:\WINDOWS\System32\sechost.dll
+0x00007fffbe660000 - 0x00007fffbe78a000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007fffbd9a0000 - 0x00007fffbdb41000 	C:\WINDOWS\System32\USER32.dll
+0x00007fffbc580000 - 0x00007fffbc5a2000 	C:\WINDOWS\System32\win32u.dll
+0x00007fffbd910000 - 0x00007fffbd93b000 	C:\WINDOWS\System32\GDI32.dll
+0x00007fffbc370000 - 0x00007fffbc47b000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007fffbc280000 - 0x00007fffbc31d000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007fffbc480000 - 0x00007fffbc580000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007fffafd80000 - 0x00007fffb001a000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e\COMCTL32.dll
+0x00007fffbcc80000 - 0x00007fffbccb0000 	C:\WINDOWS\System32\IMM32.DLL
+0x0000000053de0000 - 0x0000000053eb2000 	C:\Program Files\Java\jdk1.8.0_91\jre\bin\msvcr100.dll
+0x0000000052c20000 - 0x00000000534b3000 	C:\Program Files\Java\jdk1.8.0_91\jre\bin\server\jvm.dll
+0x00007fffbd900000 - 0x00007fffbd908000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007fffba6c0000 - 0x00007fffba6c9000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007fffaf530000 - 0x00007fffaf557000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007fffbdd90000 - 0x00007fffbddfb000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007fffafd30000 - 0x00007fffafd3a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x0000000053dd0000 - 0x0000000053ddf000 	C:\Program Files\Java\jdk1.8.0_91\jre\bin\verify.dll
+0x0000000053da0000 - 0x0000000053dc9000 	C:\Program Files\Java\jdk1.8.0_91\jre\bin\java.dll
+0x0000000052bf0000 - 0x0000000052c13000 	C:\Program Files\Java\jdk1.8.0_91\jre\bin\instrument.dll
+0x0000000052bd0000 - 0x0000000052be6000 	C:\Program Files\Java\jdk1.8.0_91\jre\bin\zip.dll
+
+VM Arguments:
+jvm_args: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\lib\idea_rt.jar=50955:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin -Dfile.encoding=UTF-8 
+java_command: FindMST_raw
+java_class_path (initial): C:\Program Files\Java\jdk1.8.0_91\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\rt.jar;C:\Users\parma\IdeaProjects\Temp\out\production\Temp;C:\Users\parma\.m2\repository\org\jgrapht\jgrapht-core\1.4.0\jgrapht-core-1.4.0.jar;C:\Users\parma\.m2\repository\org\jheaps\jheaps\0.11\jheaps-0.11.jar;C:\Users\parma\.m2\repository\jfree\jfreechart\1.0.0\jfreechart-1.0.0.jar;C:\Users\parma\.m2\repository\jfree\jcommon\1.0.0\jcommon-1.0.0.jar;C:\Users\parma\.m2\repository\junit\junit\3.8\junit-3.8.jar;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\lib\idea_rt.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_91
+PATH=C:\app\parma\product\11.2.0\dbhome_1\bin;C:\app\parma\virtual\product\12.2.0\dbhome_3\bin;C:\app\parma\virtual\product\12.2.0\dbhome_2\bin;C:\app\parma\virtual\product\12.2.0\dbhome_1\bin;C:\Users\parma\Programing softwares\Oracle\instantclient_12_2;C:\Program Files (x86)\Groovy\GROOVY~1.0\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Java\jdk1.8.0_91\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Graphviz2.38\bin;C:\Program Files (x86)\PuTTY\;C:\Android;C:\Windows\System32;C:\Users\parma\Programing_softwares\command;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\parma\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\parma\AppData\Local\Programs\Python\Python39\;C:\Users\parma\AppData\Local\Programs\Python\Python37-32\Scripts\;C:\Users\parma\AppData\Local\Programs\Python\Python37-32\;PythonPath;C:\Python27;C:\Program Files (x86)\Graphviz2.38\bin;;C:\Users\parma\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\parma\AppData\Roaming\npm;C:\Users\parma\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\PyCharm Community Edition 2020.3.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.2.2\bin;
+USERNAME=parma
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 78 Stepping 3, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 19041 (10.0.19041.1202)
+
+CPU:total 4 (2 cores per cpu, 2 threads per core) family 6 model 78 stepping 3, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx
+
+Memory: 4k page, physical 12470176k(2514028k free), swap 14946208k(4076k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.91-b15) for windows-amd64 JRE (1.8.0_91-b15), built on May 20 2016 17:43:15 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Fri Oct 08 13:13:12 2021
+elapsed time: 0 seconds (0d 0h 0m 0s)
+
