@@ -13,11 +13,10 @@ public class PlotLineGraph extends ApplicationFrame {
     }
 
     public static void main( String[ ] args ) {
-        PlotLineGraph chart = new PlotLineGraph("bruh");
+        PlotLineGraph chart = new PlotLineGraph("");
     }
 
     public void plot(DefaultCategoryDataset dataset, String chartTitle, String x, String y) {
-//        System.out.println("Dataset: " + dataset);
         JFreeChart lineChart = ChartFactory.createLineChart(
                 chartTitle,
                 x,y,

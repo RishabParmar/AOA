@@ -1,8 +1,4 @@
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jgrapht.generate.GnmRandomGraphGenerator;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.DefaultUndirectedGraph;
-import org.jgrapht.util.SupplierUtil;
 
 import java.util.*;
 
@@ -19,30 +15,8 @@ public class MST {
         }
     }
 
-    DefaultUndirectedGraph<String, DefaultEdge> generateGraph(int v, int e) {
-        GnmRandomGraphGenerator<String, DefaultEdge> graph = new GnmRandomGraphGenerator<String, DefaultEdge>(v, e);
-        DefaultUndirectedGraph<String, DefaultEdge> undirectedGraph = new DefaultUndirectedGraph<>
-                (SupplierUtil.createStringSupplier(1), SupplierUtil.DEFAULT_EDGE_SUPPLIER, false);
-        graph.generateGraph(undirectedGraph, null);
-        return undirectedGraph;
-    }
-
-    void createGraphAndList(int numberOfNodes, int numberOfEdges) {
+    void createRandomGraphAndList(int numberOfNodes, int numberOfEdges) {
         initializeAdjList(numberOfNodes);
-//        for (int i = 1; i <= numberOfNodes; i++) {
-//            System.out.println("Enter number of neighbours: ");
-//            Scanner sc = new Scanner(System.in);
-//            int n = sc.nextInt();
-//            for (int j = 0; j < n; j++) {
-//                System.out.println("Enter neighbour and weight of edge: ");
-//                int neighbour = sc.nextInt();
-//                int weight = sc.nextInt();
-//                adjacencyList[i].add(neighbour);
-//                adjacencyList[neighbour].add(i);
-//                map.put(i + " " + neighbour, weight);
-//                map.put(neighbour + " " + i, weight);
-//            }
-//        }
         int max = 100;
         int min = 0;
         int range = max - min + 1;
@@ -53,19 +27,15 @@ public class MST {
                 int weight = (int)(Math.random() * range);
                 map.put(i + " " + (i+1), weight);
                 map.put((i+1) + " " + i, weight);
-//                System.out.println(map);
             }
             // After connecting the graph above, now adding randomized weighted edges to create cycles
             else {
-//                System.out.println("Bruh");
                 int vertice1;
                 int vertice2;
                 while(true) {
                     vertice1 = new Random().nextInt(numberOfNodes - min) + 1;
                     vertice2 = new Random().nextInt(numberOfNodes - min) + 1;
-                    System.out.println(vertice1 + " " + vertice2);
                     if(vertice1 != vertice2 && !map.containsKey(vertice1 + " " + vertice2)) {
-//                        System.out.println("Breaking!");
                         break;
                     }
                 }
@@ -74,13 +44,13 @@ public class MST {
                 int weight = (int)(Math.random() * range + min);
                 map.put(vertice1 + " " + vertice2, weight);
                 map.put(vertice2 + " " + vertice1, weight);
-//                System.out.println(map);
             }
         }
-        for(LinkedList<Integer> list: adjacencyList) {
-            System.out.println(list);
-        }
-        System.out.println("Map: " + map);
+        // For printing the adjacency list and weights for graph
+//        for(LinkedList<Integer> list: adjacencyList) {
+//            System.out.println(list);
+//        }
+//        System.out.println("Map: " + map);
     }
 
     boolean findCycle(int currentNode, int parent, boolean[] visitedArr) {
@@ -122,7 +92,7 @@ public class MST {
         return false;
     }
 
-    boolean initiateCycleFindingProcess(int numberOfNodes) {
+    boolean findMST(int numberOfNodes) {
         for(int j=0;j<9;j++) {
             // Initializing stack for cycle finding
             list = new ArrayList<String>();
@@ -134,33 +104,30 @@ public class MST {
 
     public static void main(String[] args) {
         MST mst = new MST();
-        int nodes = 1000;
+        int nodes = 4500;
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for(int i = 3;i<=nodes;i++) {
+        for(int i = 3;i<=nodes;i += 10) {
             int edges;
             if(i < 6) {
-                int range = (i*(i-1)/2) - i-1 +1 ;
+                int range = (i*(i-1)/2) - i-1 +1;
                 edges = (int)(Math.random() * range + (i-1));
             } else {
                 int range = i+8 - i-1 + 1;
                 edges = (int)(Math.random() * range + (i-1));
             }
-            System.out.println("nodes: " + i + ", edges : " + edges);
-            mst.createGraphAndList(i, edges);
-//            long startTime = System.nanoTime();
-            mst.initiateCycleFindingProcess(i);
-//            // Printing the adjacency linkedlist
-            System.out.println("MST found: ");
-            for(LinkedList<Integer> list: mst.adjacencyList) {
-                System.out.println(list);
-            }
-//            long endTime = System.nanoTime();
-//            dataset.addValue(endTime - startTime, "", Integer.toString(i+edges));
-//            System.out.println("Execution time: " + (endTime - startTime));
+            mst.createRandomGraphAndList(i, edges);
+            long startTime = System.nanoTime();
+            mst.findMST(i);
+            long endTime = System.nanoTime();
+            // Printing the adjacency linkedlist
+//            System.out.println("MST found: ");
+//            for(LinkedList<Integer> list: mst.adjacencyList) {
+//                System.out.println(list);
+//            }
+            dataset.addValue(endTime - startTime, "", Integer.toString(i+edges));
         }
         // Plotting the line graph for processing time as a function of the graph size
-//        System.out.println("Yolo!");
-//        PlotLineGraph plotLineGraph = new PlotLineGraph("Cycle Finding Graph");
-//        plotLineGraph.plot(dataset, "Cycle Finding Graph" , "Nodes + Edges", "Execution Time(in ns)");
+        PlotLineGraph plotLineGraph = new PlotLineGraph("Finding Minimum Spanning Tree");
+        plotLineGraph.plot(dataset, "Minimum Spanning Tree" , "Vertices + Edges", "Execution Time(in ns)");
     }
 }

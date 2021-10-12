@@ -10,5 +10,6 @@
     <orderEntry type="library" name="jgrapht.core" level="project" />
     <orderEntry type="library" name="jgrapht.core1" level="project" />
     <orderEntry type="library" name="jfreechart" level="project" />
+    <orderEntry type="library" name="junit" level="project" />
   </component>
 </module>

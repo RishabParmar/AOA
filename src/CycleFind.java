@@ -10,14 +10,28 @@ public class CycleFind {
 
     LinkedList<Integer> adjacencyList[];
     Stack<Integer> stack;
+    int nodes;
+    int edges;
 
+    public CycleFind(int nodes, int edges) {
+        this.nodes = nodes;
+        this.edges = edges;
+        initializeAdjList(nodes);
+        createGraphAndList();
+    }
+
+    public CycleFind(LinkedList<Integer>[] adjList, int numOfEdges) {
+        this.adjacencyList = adjList;
+        this.nodes = adjList.length-1;
+        this.edges = numOfEdges;
+        this.stack = new Stack<>();
+    }
     void initializeAdjList(int numberOfNodes) {
         adjacencyList = new LinkedList[numberOfNodes+1];
         for(int i = 0;i<adjacencyList.length;i++) {
             adjacencyList[i] = new LinkedList<>();
         }
-        // Initializing stack for cycle finding
-         stack = new Stack<>();
+        stack = new Stack<>();
     }
 
     DefaultUndirectedGraph<String, DefaultEdge> generateGraph(int v, int e) {
@@ -28,9 +42,10 @@ public class CycleFind {
         return undirectedGraph;
     }
 
-    void createGraphAndList(int numberOfNodes, int numberOfEdges) {
+    void createGraphAndList() {
+        int numberOfNodes = this.nodes;
+        int numberOfEdges = this.edges;
         DefaultUndirectedGraph<String, DefaultEdge> currentGraph = generateGraph(numberOfNodes, numberOfEdges);
-//        System.out.println(Arrays.toString(currentGraph.toString().split("]")));
         String[] str = currentGraph.toString().split("]");
         initializeAdjList(numberOfNodes);
         int a = 0;
@@ -47,15 +62,10 @@ public class CycleFind {
                 }
             }
         }
-        // Printing the adjacency linkedlist
-//        for(LinkedList<Integer> list: adjacencyList) {
-//            System.out.println(list);
-//        }
     }
 
     boolean findCycle(int currentNode, int parent, boolean[] visitedArr) {
         visitedArr[currentNode] = true;
-//        System.out.println("pushing: " + currentNode);
         stack.push(currentNode);
         for (int currentIndex : adjacencyList[currentNode]) {
             if (!visitedArr[currentIndex]) {
@@ -71,7 +81,8 @@ public class CycleFind {
         return false;
     }
 
-    boolean initiateCycleFindingProcess(int numberOfNodes) {
+    boolean initiateCycleFindingProcess() {
+        int numberOfNodes = this.nodes;
         boolean[] visitedArr = new boolean[numberOfNodes+1];
         for (int i = 1; i <= numberOfNodes; i++)
         {
@@ -86,36 +97,41 @@ public class CycleFind {
     }
 
     public static void main(String[] args) {
-        CycleFind cycle = new CycleFind();
-        int nodes = 10;
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for(int i = 1;i<=nodes;i++) {
+        int nodes = 5;
+//        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for(int i = nodes;i<=nodes;i++) {
             int edges = (int)(Math.random() * i*(i-1)/2);
-            cycle.createGraphAndList(i, edges);
+            CycleFind cycle = new CycleFind(i, edges);
+            cycle.createGraphAndList();
+            //         Printing the adjacency linkedlist
+            System.out.println("Graph: ");
+            int k = 0;
+            for(LinkedList<Integer> list: cycle.adjacencyList) {
+                System.out.println(k + " -> " + list);
+                k++;
+            }
             long startTime = System.nanoTime();
-            if(cycle.initiateCycleFindingProcess(i)) {
-//                System.out.println("Cycle found. Cycle Path: ");
+            if(cycle.initiateCycleFindingProcess()) {
+                System.out.println("Cycle found. Cycle Path: ");
                 int cycleStartEndNode = cycle.stack.pop();
                 int completeCycleNode = cycle.stack.peek();
 //                System.out.println("start end node: " + cycleStartEndNode);
                 while (!cycle.stack.empty()) {
                     // Will print only until the point where the cycle was found, not beyond that
                     if(cycle.stack.peek() != cycleStartEndNode) {
-//                        System.out.print(cycle.stack.pop() + " ");
-                        cycle.stack.pop();
+                        System.out.print(cycle.stack.pop() + " ");
+//                        cycle.stack.pop();
                     } else break;
                 }
-//                System.out.print(cycleStartEndNode + " " + completeCycleNode + "\n");
+                System.out.print(cycleStartEndNode + " " + completeCycleNode + "\n");
             } else {
-//                System.out.println("Cycle not found");
+                System.out.println("Cycle not found");
             }
             long endTime = System.nanoTime();
-            dataset.addValue(endTime - startTime, "", Integer.toString(i+edges));
-//            System.out.println("Execution time: " + (endTime - startTime));
+//            dataset.addValue(endTime - startTime, "", Integer.toString(i+edges));
         }
         // Plotting the line graph for processing time as a function of the graph size
-//        System.out.println("Yolo!");
-        PlotLineGraph plotLineGraph = new PlotLineGraph("Cycle Finding Graph");
-        plotLineGraph.plot(dataset, "Cycle Finding Graph" , "Nodes + Edges", "Execution Time(in ns)");
+//        PlotLineGraph plotLineGraph = new PlotLineGraph("Cycle Finding Graph");
+//        plotLineGraph.plot(dataset, "Cycle Finding Graph" , "Nodes + Edges", "Execution Time(in ns)");
     }
 }
